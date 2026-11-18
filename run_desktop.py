@@ -68,7 +68,7 @@ def main():
         easy_drag=True,
         on_top=True,
         transparent=True,
-        background_color="#00000000"
+        background_color="#000000"
     )
 
     window.events.closed += on_closed
