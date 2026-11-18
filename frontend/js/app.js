@@ -27,6 +27,38 @@
   let audioContext = null;
   let currentAudio = null;
 
+  // Emotion badge mappings
+  const EMOTION_BADGES = {
+    neutral: "🌸 Normal",
+    happy: "✨ Happy!",
+    smiling: "😊 Smiling",
+    blushing: "😳 Blushing",
+    shy: "🙈 Shy...",
+    pouting: "🥺 Pout!",
+    playfully_jealous: "😤 Hmph!",
+    sad: "💧 Sad...",
+    concerned: "🥺 Concerned",
+    surprised: "😲 Surprised!",
+    curious: "🧐 Curious",
+    excited: "🎉 Excited!",
+    sleepy: "💤 Sleepy...",
+    thinking: "💭 Thinking...",
+    laughing: "😆 Hehe!"
+  };
+
+  const characterCard = document.getElementById("character-card");
+  const emotionBubble = document.getElementById("emotion-bubble");
+  const voiceWaves = document.getElementById("voice-waves");
+
+  function setVisualEmotion(exp) {
+    if (rig) rig.setEmotion(exp);
+    if (emotionBubble) emotionBubble.textContent = EMOTION_BADGES[exp] || `🌸 ${exp}`;
+    if (characterCard) {
+      characterCard.classList.remove(...Object.keys(EMOTION_BADGES));
+      characterCard.classList.add(exp);
+    }
+  }
+
   // 1. WebSocket Setup
   function connectWS() {
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
@@ -45,7 +77,7 @@
 
       switch (data.type) {
         case "expression_change":
-          rig.setEmotion(data.expression);
+          setVisualEmotion(data.expression);
           break;
 
         case "token":
@@ -99,11 +131,20 @@
       currentAudio = null;
     }
 
-    if (expression) rig.setEmotion(expression);
+    if (expression) setVisualEmotion(expression);
     rig.setSpeaking(true);
+    if (characterCard) characterCard.classList.add("speaking");
+    if (voiceWaves) voiceWaves.style.display = "flex";
 
     const audio = new Audio(audioUrl);
     currentAudio = audio;
+
+    function onSpeechEnd() {
+      rig.setSpeaking(false);
+      setVisualEmotion("neutral");
+      if (characterCard) characterCard.classList.remove("speaking");
+      if (voiceWaves) voiceWaves.style.display = "none";
+    }
 
     // Use Web Audio API for real-time mouth movement
     try {
@@ -126,21 +167,16 @@
           rig.setAudioAmplitude(avg / 128.0);
           requestAnimationFrame(checkAudio);
         } else {
-          rig.setSpeaking(false);
-          rig.setEmotion("neutral");
+          onSpeechEnd();
         }
       }
       requestAnimationFrame(checkAudio);
     } catch (e) {
-      // Fallback simple timer lip-sync
-      audio.onended = () => {
-        rig.setSpeaking(false);
-        rig.setEmotion("neutral");
-      };
+      audio.onended = onSpeechEnd;
     }
 
     audio.play().catch(e => {
-      rig.setSpeaking(false);
+      onSpeechEnd();
     });
   }
 
@@ -150,7 +186,7 @@
     jealousBanner.textContent = "Hmph! (Playful Jealous)";
     setTimeout(() => { jealousBanner.style.display = "none"; }, 3500);
 
-    rig.setEmotion(data.expression || "playfully_jealous");
+    setVisualEmotion(data.expression || "playfully_jealous");
     if (data.audio_url) {
       playAudioResponse(data.audio_url, data.expression);
     }
