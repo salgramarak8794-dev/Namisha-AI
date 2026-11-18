@@ -1,0 +1,48 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Databases & Runtime Cache
+database/*.db
+database/*.db-journal
+database/*.db-wal
+temp/
+*.tmp
+*.mp3
+*.wav
+
+# User Secrets & Private Data
+.env
+.env.local
+config/secrets.json
+screenshots/
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db

@@ -1,0 +1,303 @@
+﻿:root {
+  --bg-translucent: rgba(22, 14, 38, 0.82);
+  --bg-card: rgba(35, 22, 60, 0.9);
+  --accent-purple: #9c27b0;
+  --accent-violet: #7c4dff;
+  --accent-pink: #ff4081;
+  --text-main: #f3e5f5;
+  --text-sub: #b39ddb;
+  --border-glow: rgba(156, 39, 176, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text-main);
+}
+
+#app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Drag Handle Bar */
+.drag-bar {
+  width: 90%;
+  height: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--bg-translucent);
+  backdrop-filter: blur(8px);
+  border-radius: 14px;
+  margin-top: 8px;
+  border: 1px solid var(--border-glow);
+  cursor: grab;
+  z-index: 100;
+}
+
+.drag-bar:active {
+  cursor: grabbing;
+}
+
+.brand-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #e1bee7;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00e676;
+  box-shadow: 0 0 8px #00e676;
+}
+
+.status-dot.listening {
+  background: #ff4081;
+  box-shadow: 0 0 12px #ff4081;
+}
+
+.window-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  color: var(--text-sub);
+  cursor: pointer;
+  font-size: 13px;
+  transition: color 0.2s, transform 0.1s;
+}
+
+.btn-icon:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Character Viewport */
+.character-viewport {
+  position: relative;
+  width: 320px;
+  height: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#character-canvas {
+  width: 300px;
+  height: 320px;
+  display: block;
+}
+
+/* Voice-First Jealousy Indicator */
+.jealous-banner {
+  position: absolute;
+  top: 15px;
+  background: rgba(255, 64, 129, 0.9);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(255, 64, 129, 0.5);
+  animation: bounceIn 0.4s ease-out;
+  display: none;
+  z-index: 90;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Floating HUD Controls */
+.floating-hud {
+  display: flex;
+  gap: 10px;
+  background: var(--bg-translucent);
+  backdrop-filter: blur(10px);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border-glow);
+  margin-bottom: 8px;
+  z-index: 80;
+}
+
+.hud-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+
+.hud-btn:hover {
+  background: rgba(156, 39, 176, 0.4);
+  border-color: var(--accent-violet);
+}
+
+.hud-btn.active {
+  background: var(--accent-violet);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(124, 77, 255, 0.6);
+}
+
+/* Collapsible Chat & Input Drawer */
+.chat-drawer {
+  width: 92%;
+  background: var(--bg-translucent);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  border: 1px solid var(--border-glow);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  max-height: 180px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chat-history {
+  flex: 1;
+  overflow-y: auto;
+  font-size: 12px;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding-right: 4px;
+}
+
+.chat-bubble {
+  padding: 6px 10px;
+  border-radius: 10px;
+  max-width: 88%;
+  word-break: break-word;
+}
+
+.chat-bubble.assistant {
+  background: rgba(124, 77, 255, 0.25);
+  align-self: flex-start;
+  border-left: 2px solid var(--accent-pink);
+}
+
+.chat-bubble.user {
+  background: rgba(255, 255, 255, 0.12);
+  align-self: flex-end;
+}
+
+.input-row {
+  display: flex;
+  gap: 6px;
+}
+
+.chat-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 12px;
+  color: #fff;
+  outline: none;
+}
+
+.chat-input:focus {
+  border-color: var(--accent-violet);
+}
+
+.send-btn {
+  background: var(--accent-violet);
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+/* Resource Monitor Badge */
+.resource-badge {
+  font-size: 10px;
+  color: var(--text-sub);
+  margin-top: 4px;
+  opacity: 0.8;
+}
+
+/* Settings Modal */
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 5, 20, 0.85);
+  backdrop-filter: blur(10px);
+  display: none;
+  flex-direction: column;
+  padding: 18px;
+  z-index: 200;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+}
+
+.setting-item input[type="checkbox"] {
+  accent-color: var(--accent-violet);
+}
+
+.setting-item select, .setting-item input[type="text"] {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+}

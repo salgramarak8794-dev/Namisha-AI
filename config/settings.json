@@ -1,0 +1,60 @@
+﻿{
+  "general": {
+    "app_name": "Namisha",
+    "version": "2.0.0",
+    "lightweight_mode": false,
+    "resource_monitor_visible": true,
+    "stay_on_top": true,
+    "window_width": 420,
+    "window_height": 620
+  },
+  "ai": {
+    "primary_provider": "ollama",
+    "ollama_endpoint": "http://localhost:11434",
+    "ollama_model": "llama3.2:3b",
+    "gemini_enabled": false,
+    "gemini_api_key": "",
+    "gemini_model": "gemini-2.5-flash",
+    "intelligent_routing": true
+  },
+  "voice": {
+    "enabled": true,
+    "tts_engine": "edge_tts",
+    "edge_tts_voice": "en-US-AnaNeural",
+    "speaking_speed": 1.0,
+    "speaking_pitch": "+0Hz",
+    "volume": 1.0,
+    "muted": false,
+    "interruptible": true,
+    "wake_word_enabled": false,
+    "wake_word": "hey namisha"
+  },
+  "character": {
+    "scale": 1.0,
+    "animation_quality": "medium",
+    "idle_fps": 18,
+    "active_fps": 30,
+    "idle_animation": true,
+    "natural_blinking": true,
+    "eye_tracking": true,
+    "lip_sync_enabled": true
+  },
+  "playful_jealous_mode": {
+    "enabled": true,
+    "voice_first_only": true,
+    "away_threshold_seconds": 300,
+    "cooldown_seconds": 900,
+    "intensity": "medium",
+    "spoken_return_greetings": true
+  },
+  "screen_awareness": {
+    "require_explicit_permission": true,
+    "auto_analyze_code_errors": true
+  },
+  "lan": {
+    "enabled": false,
+    "host": "127.0.0.1",
+    "port": 8765,
+    "auth_token": ""
+  }
+}

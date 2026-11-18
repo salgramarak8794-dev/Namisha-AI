@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Namisha 2.0</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Top Drag Bar -->
+    <div class="drag-bar pywebview-drag-region">
+      <div class="brand-title">
+        <span id="status-dot" class="status-dot"></span>
+        <span>Namisha</span>
+      </div>
+      <div class="window-controls">
+        <button id="settings-btn" class="btn-icon" title="Settings">⚙️</button>
+      </div>
+    </div>
+
+    <!-- Playful Jealous Notification (Voice-First Indicator) -->
+    <div id="jealous-banner" class="jealous-banner">Hmph! (Playful Jealous)</div>
+
+    <!-- 2D Anime Rig Viewport -->
+    <div class="character-viewport">
+      <canvas id="character-canvas" width="320" height="340"></canvas>
+    </div>
+
+    <!-- Minimal HUD Controls -->
+    <div class="floating-hud">
+      <button id="mic-btn" class="hud-btn" title="Speak to Namisha">🎙️ Voice</button>
+      <button id="screen-btn" class="hud-btn" title="Screen Awareness">👁️ Screen</button>
+    </div>
+
+    <!-- Collapsible Chat Drawer -->
+    <div class="chat-drawer">
+      <div id="chat-history" class="chat-history">
+        <div class="chat-bubble assistant">
+          Hello! I'm Namisha, your anime desktop companion. How are you feeling today?
+        </div>
+      </div>
+      <div class="input-row">
+        <input id="chat-input" class="chat-input" type="text" placeholder="Talk with Namisha..." autocomplete="off">
+        <button id="send-btn" class="send-btn">➤</button>
+      </div>
+    </div>
+
+    <!-- Real-time Resource Badge -->
+    <div id="resource-badge" class="resource-badge">Loading diagnostics...</div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+      <div class="modal-header">
+        <span>Namisha Settings</span>
+        <button id="close-settings-btn" class="btn-icon">✖</button>
+      </div>
+      <div class="setting-item">
+        <span>Playful Jealous Mode</span>
+        <input type="checkbox" id="toggle-jealous" checked>
+      </div>
+      <div class="setting-item">
+        <span>Voice Output (TTS)</span>
+        <input type="checkbox" id="toggle-voice" checked>
+      </div>
+      <div class="setting-item">
+        <span>Lightweight Mode (Low CPU/RAM)</span>
+        <input type="checkbox" id="toggle-lightweight">
+      </div>
+      <div class="setting-item" style="margin-top: 10px;">
+        <span style="font-size: 11px; color: #b39ddb;">Changes save automatically upon closing.</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/character_rig.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
