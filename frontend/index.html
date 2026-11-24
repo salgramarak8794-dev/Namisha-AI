@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -36,9 +36,12 @@
 
     <!-- Minimal HUD Controls -->
     <div class="floating-hud">
-      <button id="mic-btn" class="hud-btn" title="Speak to Namisha">🎙️ Voice</button>
+      <button id="mic-btn" class="hud-btn" title="Toggle Hands-Free Voice Chat">🎙️ Voice Chat</button>
       <button id="screen-btn" class="hud-btn" title="Screen Awareness">👁️ Screen</button>
     </div>
+
+    <!-- Live Voice Conversation Indicator -->
+    <div id="voice-status-pill" class="voice-status-pill">🎙️ Voice ready — click to chat</div>
 
     <!-- Collapsible Chat Drawer -->
     <div class="chat-drawer">
@@ -61,6 +64,19 @@
       <div class="modal-header">
         <span>Namisha Settings</span>
         <button id="close-settings-btn" class="btn-icon">✖</button>
+      </div>
+      <div class="setting-item">
+        <span>Continuous Voice Chat</span>
+        <input type="checkbox" id="toggle-continuous-voice" checked>
+      </div>
+      <div class="setting-item">
+        <span>Natural Voice Model</span>
+        <select id="select-voice">
+          <option value="en-US-JennyNeural" selected>Jenny (Warm & Natural)</option>
+          <option value="en-US-AvaNeural">Ava (Expressive & Friendly)</option>
+          <option value="en-US-AriaNeural">Aria (Conversational)</option>
+          <option value="en-US-EmmaNeural">Emma (Cheerful)</option>
+        </select>
       </div>
       <div class="setting-item">
         <span>Playful Jealous Mode</span>

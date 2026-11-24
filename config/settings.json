@@ -1,6 +1,12 @@
 ﻿{
   "general": {
-    "lightweight_mode": false
+    "app_name": "Namisha",
+    "version": "2.0.0",
+    "lightweight_mode": false,
+    "resource_monitor_visible": true,
+    "stay_on_top": true,
+    "window_width": 360,
+    "window_height": 620
   },
   "ai": {
     "primary_provider": "ollama",
@@ -12,20 +18,27 @@
     "intelligent_routing": true
   },
   "voice": {
-    "enabled": true
+    "enabled": true,
+    "tts_engine": "edge_tts",
+    "edge_tts_voice": "en-US-JennyNeural",
+    "speaking_speed": 1.0,
+    "volume": 1.0,
+    "muted": false,
+    "continuous_conversation": true,
+    "interruptible": true
   },
   "character": {
     "scale": 1.0,
     "animation_quality": "medium",
     "idle_fps": 18,
     "active_fps": 30,
-    "idle_animation": true,
-    "natural_blinking": true,
-    "eye_tracking": true,
-    "lip_sync_enabled": true
+    "idle_animation": true
   },
   "playful_jealous_mode": {
-    "enabled": true
+    "enabled": true,
+    "voice_first_only": true,
+    "away_threshold_seconds": 300,
+    "cooldown_seconds": 900
   },
   "screen_awareness": {
     "require_explicit_permission": true,

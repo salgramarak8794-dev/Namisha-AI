@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --bg-translucent: rgba(22, 14, 38, 0.82);
   --bg-card: rgba(35, 22, 60, 0.9);
   --accent-purple: #9c27b0;
@@ -259,9 +259,47 @@ body {
 }
 
 .hud-btn.active {
-  background: var(--accent-violet);
+  background: var(--accent-pink);
   color: #fff;
-  box-shadow: 0 0 10px rgba(124, 77, 255, 0.6);
+  border-color: #ff80ab;
+  box-shadow: 0 0 14px rgba(255, 64, 129, 0.7);
+  animation: pulseListen 1.6s infinite ease-in-out;
+}
+
+/* Live Voice Status Pill */
+.voice-status-pill {
+  font-size: 11px;
+  font-weight: 500;
+  color: #e1bee7;
+  background: rgba(22, 14, 38, 0.75);
+  border: 1px solid rgba(156, 39, 176, 0.3);
+  padding: 3px 12px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  transition: all 0.25s ease;
+  letter-spacing: 0.3px;
+  text-align: center;
+  max-width: 88%;
+}
+
+.voice-status-pill.listening {
+  color: #fff;
+  background: rgba(255, 64, 129, 0.35);
+  border-color: #ff4081;
+  box-shadow: 0 0 12px rgba(255, 64, 129, 0.5);
+}
+
+.voice-status-pill.speaking {
+  color: #fff;
+  background: rgba(124, 77, 255, 0.35);
+  border-color: #7c4dff;
+  box-shadow: 0 0 12px rgba(124, 77, 255, 0.5);
+}
+
+@keyframes pulseListen {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
 }
 
 /* Collapsible Chat & Input Drawer */
